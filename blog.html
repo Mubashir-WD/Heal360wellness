@@ -25,7 +25,7 @@
                 <li><a href="team.html">Directors</a></li>
                 <li><a href="blog.html">Blog</a></li>
                 <li><a href="contact.html">Contact</a></li>
-                <li><a href="login.html">Login</a></li>
+                <!-- <li><a href="login.html">Login</a></li> -->
             </ul>
             <div class="hamburger">
                 <span></span>
@@ -45,9 +45,20 @@
     <section class="blog-categories">
         <div class="container">
             <div class="category-tabs">
-                <button class="tab-btn active" data-category="all">All Posts</button>
-                <button class="tab-btn" data-category="women">Women's Fertility</button>
-                <button class="tab-btn" data-category="men">Men's Fertility</button>
+                <div class="tabs" role="tablist" aria-label="Blog categories">
+                    <button class="tab-btn active" data-category="all" role="tab" aria-selected="true">
+                        <i class="fas fa-th-large" aria-hidden="true"></i>
+                        <span>All Posts</span>
+                    </button>
+                    <button class="tab-btn" data-category="women" role="tab" aria-selected="false">
+                        <i class="fas fa-venus" aria-hidden="true"></i>
+                        <span>Women's Fertility</span>
+                    </button>
+                    <button class="tab-btn" data-category="men" role="tab" aria-selected="false">
+                        <i class="fas fa-mars" aria-hidden="true"></i>
+                        <span>Men's Fertility</span>
+                    </button>
+                </div>
             </div>
         </div>
     </section>
@@ -58,7 +69,7 @@
                 <!-- Blog Post 1 -->
                 <article class="blog-post women" data-post="pcos-fertility">
                     <div class="post-image">
-                        <img src="images/pcos-blog.jpg" alt="PCOS and Fertility - Functional Medicine Approach" loading="lazy">
+                        <img src="images/PCOS.png" alt="PCOS and Fertility - Functional Medicine Approach" loading="lazy">
                     </div>
                     <div class="post-content">
                         <h2>PCOS & Fertility: Functional Medicine Approach</h2>
@@ -71,7 +82,7 @@
                 <!-- Blog Post 2 -->
                 <article class="blog-post women" data-post="endometriosis-conception">
                     <div class="post-image">
-                        <img src="images/endometriosis-blog.jpg" alt="How Endometriosis Affects Conception" loading="lazy">
+                        <img src="images/Endo.png" alt="How Endometriosis Affects Conception" loading="lazy">
                     </div>
                     <div class="post-content">
                         <h2>How Endometriosis Affects Conception</h2>
@@ -84,7 +95,7 @@
                 <!-- Blog Post 3 -->
                 <article class="blog-post women" data-post="low-amh-natural">
                     <div class="post-image">
-                        <img src="images/amh-blog.jpg" alt="Low AMH - What You Can Do Naturally" loading="lazy">
+                        <img src="images/Low_AMH.png" alt="Low AMH - What You Can Do Naturally" loading="lazy">
                     </div>
                     <div class="post-content">
                         <h2>Low AMH – What You Can Do Naturally</h2>
@@ -94,23 +105,11 @@
                     </div>
                 </article>
 
-                <!-- Blog Post 4 -->
-                <article class="blog-post women" data-post="egg-quality-foods">
-                    <div class="post-image">
-                        <img src="images/egg-quality-blog.jpg" alt="Egg Quality Boosting Foods" loading="lazy">
-                    </div>
-                    <div class="post-content">
-                        <h2>Egg Quality Boosting Foods</h2>
-                        <p class="post-meta">By Dr. Tahera Khaledi | February 28, 2023 | Women's Fertility</p>
-                        <p>The foods you eat play a crucial role in egg quality and ovarian health. Learn about the top nutrients and foods that support optimal egg development.</p>
-                        <a href="#egg-quality-foods" class="read-more">Read More</a>
-                    </div>
-                </article>
-
+                
                 <!-- Blog Post 5 -->
                 <article class="blog-post women" data-post="period-pain-normal">
                     <div class="post-image">
-                        <img src="images/period-pain-blog.jpg" alt="Why Period Pain Is Not Normal" loading="lazy">
+                        <img src="images/Period_Pain.png" alt="Why Period Pain Is Not Normal" loading="lazy">
                     </div>
                     <div class="post-content">
                         <h2>Why Period Pain Is Not Normal</h2>
@@ -123,7 +122,7 @@
                 <!-- Blog Post 6 -->
                 <article class="blog-post men" data-post="improve-sperm-count">
                     <div class="post-image">
-                        <img src="images/sperm-count-blog.jpg" alt="How to Improve Sperm Count Naturally" loading="lazy">
+                        <img src="images/Sperm_Count.png" alt="How to Improve Sperm Count Naturally" loading="lazy">
                     </div>
                     <div class="post-content">
                         <h2>How to Improve Sperm Count Naturally</h2>
@@ -136,7 +135,7 @@
                 <!-- Blog Post 7 -->
                 <article class="blog-post men" data-post="male-hormones-fertility">
                     <div class="post-image">
-                        <img src="images/male-hormones-blog.jpg" alt="Male Hormones & Fertility: Complete Guide" loading="lazy">
+                        <img src="images/Male_Fertility.png" alt="Male Hormones & Fertility: Complete Guide" loading="lazy">
                     </div>
                     <div class="post-content">
                         <h2>Male Hormones & Fertility: Complete Guide</h2>
@@ -149,7 +148,7 @@
                 <!-- Blog Post 8 -->
                 <article class="blog-post men" data-post="stress-testosterone-sperm">
                     <div class="post-image">
-                        <img src="images/stress-blog.jpg" alt="Effect of Stress on Testosterone & Sperm Quality" loading="lazy">
+                        <img src="images/Testosterone.png" alt="Effect of Stress on Testosterone & Sperm Quality" loading="lazy">
                     </div>
                     <div class="post-content">
                         <h2>Effect of Stress on Testosterone & Sperm Quality</h2>
@@ -162,7 +161,7 @@
                 <!-- Blog Post 9 -->
                 <article class="blog-post men" data-post="dna-fragmentation-reverse">
                     <div class="post-image">
-                        <img src="images/dna-fragmentation-blog.jpg" alt="DNA Fragmentation: Natural Ways to Reverse" loading="lazy">
+                        <img src="images/DNA.png" alt="DNA Fragmentation: Natural Ways to Reverse" loading="lazy">
                     </div>
                     <div class="post-content">
                         <h2>DNA Fragmentation: Natural Ways to Reverse</h2>
@@ -175,7 +174,7 @@
                 <!-- Blog Post 10 -->
                 <article class="blog-post men" data-post="male-fertility-diet">
                     <div class="post-image">
-                        <img src="images/male-diet-blog.jpg" alt="Male Fertility Diet: What Every Man Should Eat" loading="lazy">
+                        <img src="images/Male_Fer.png" alt="Male Fertility Diet: What Every Man Should Eat" loading="lazy">
                     </div>
                     <div class="post-content">
                         <h2>Male Fertility Diet: What Every Man Should Eat</h2>
@@ -411,9 +410,10 @@
             </div>
             <div class="footer-section">
                 <h3>Contact</h3>
-                <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
-                <p><i class="fas fa-envelope"></i> info@heal360.com</p>
-                <p><i class="fab fa-whatsapp"></i> WhatsApp: +1 (555) 987-6543</p>
+                <p><i class="fas fa-phone"></i>  +91-8919242355</p>
+                <p><i class="fas fa-envelope"></i> support@drtaheras.com</p>
+                <p><i class="fab fa-whatsapp"></i> WhatsApp:  +91-8919242355</p>
+            </div>
             </div>
         </div>
         <div class="footer-bottom">

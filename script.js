@@ -49,26 +49,117 @@ document.querySelectorAll('.service-card, .program-step, .director-profile, .blo
     observer.observe(el);
 });
 
-// Blog category filtering
+// Blog category filtering with ARIA and keyboard support
 const tabBtns = document.querySelectorAll('.tab-btn');
 const blogPosts = document.querySelectorAll('.blog-post');
+const tabList = document.querySelector('.tabs');
 
+function activateTab(btn) {
+    if (!btn) return;
+    // update visual active state
+    tabBtns.forEach(b => {
+        b.classList.toggle('active', b === btn);
+        b.setAttribute('aria-selected', b === btn ? 'true' : 'false');
+        b.tabIndex = b === btn ? 0 : -1;
+    });
+
+    const category = btn.dataset.category;
+    blogPosts.forEach(post => {
+        if (category === 'all' || post.classList.contains(category)) {
+            post.style.display = 'block';
+        } else {
+            post.style.display = 'none';
+        }
+    });
+}
+
+// Click handlers
 tabBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-        // Remove active class from all buttons
-        tabBtns.forEach(b => b.classList.remove('active'));
-        // Add active class to clicked button
-        btn.classList.add('active');
+    btn.addEventListener('click', (e) => {
+        activateTab(btn);
+    });
+});
 
-        const category = btn.dataset.category;
+// Keyboard navigation: Left/Right to move, Enter/Space to activate
+if (tabList) {
+    tabList.addEventListener('keydown', (e) => {
+        const keys = ['ArrowLeft', 'ArrowRight', 'Home', 'End', 'Enter', ' '];
+        if (!keys.includes(e.key)) return;
 
-        blogPosts.forEach(post => {
-            if (category === 'all' || post.classList.contains(category)) {
-                post.style.display = 'block';
-            } else {
-                post.style.display = 'none';
+        const current = document.activeElement;
+        let idx = Array.prototype.indexOf.call(tabBtns, current);
+
+        if (e.key === 'ArrowLeft') {
+            e.preventDefault();
+            const prev = tabBtns[(idx - 1 + tabBtns.length) % tabBtns.length];
+            prev.focus();
+        } else if (e.key === 'ArrowRight') {
+            e.preventDefault();
+            const next = tabBtns[(idx + 1) % tabBtns.length];
+            next.focus();
+        } else if (e.key === 'Home') {
+            e.preventDefault();
+            tabBtns[0].focus();
+        } else if (e.key === 'End') {
+            e.preventDefault();
+            tabBtns[tabBtns.length - 1].focus();
+        } else if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            if (current && current.classList.contains('tab-btn')) {
+                activateTab(current);
             }
-        });
+        }
+    });
+}
+
+// Initialize: ensure one active tab
+if (tabBtns.length) {
+    const initial = Array.from(tabBtns).find(b => b.classList.contains('active')) || tabBtns[0];
+    tabBtns.forEach(b => b.tabIndex = -1);
+    activateTab(initial);
+}
+
+// FAQ accordion behavior (toggle with animation and ARIA updates)
+const faqButtons = document.querySelectorAll('.faq-question');
+faqButtons.forEach(btn => {
+    const targetId = btn.getAttribute('aria-controls');
+    const answer = targetId ? document.getElementById(targetId) : null;
+
+    // Click toggles expanded state
+    btn.addEventListener('click', () => {
+        const expanded = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+        if (!answer) return;
+        if (!expanded) {
+            // open
+            answer.style.maxHeight = answer.scrollHeight + 'px';
+        } else {
+            // close
+            answer.style.maxHeight = '0';
+        }
+    });
+
+    // Allow Enter/Space to toggle when focused (buttons handle this by default, but ensure)
+    btn.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            btn.click();
+        }
+    });
+});
+
+// Initialize FAQ panels on load
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.faq-answer').forEach(ans => {
+        // If its button is aria-expanded true, set maxHeight
+        const id = ans.id;
+        if (!id) return;
+        const btn = document.querySelector(`[aria-controls="${id}"]`);
+        if (btn && btn.getAttribute('aria-expanded') === 'true') {
+            ans.style.maxHeight = ans.scrollHeight + 'px';
+        } else {
+            ans.style.maxHeight = '0';
+        }
     });
 });
 
@@ -159,17 +250,7 @@ if (contactForm) {
     }
 }
 
-// Program enrollment modal (placeholder for future implementation)
-const ctaButtons = document.querySelectorAll('.btn.primary');
-ctaButtons.forEach(btn => {
-    if (btn.textContent.includes('Book') || btn.textContent.includes('Consultation')) {
-        btn.addEventListener('click', (e) => {
-            // This would typically open a modal or redirect to booking system
-            alert('Consultation booking system coming soon! Please contact us directly.');
-        });
-    }
-});
-
+// Removed old global redirect for .btn.primary to allow dropdown to function properly
 // Lazy loading for images (if needed in future)
 const images = document.querySelectorAll('img[loading="lazy"]');
 // Intersection Observer for lazy loading is already set up above
@@ -210,6 +291,43 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 100);
         }
     }
+
+    // Highlight active nav link across pages
+    (function setActiveNavLink(){
+        try {
+            const navLinks = document.querySelectorAll('.nav-links a');
+            let current = window.location.pathname.split('/').pop();
+            if (!current) current = 'index.html';
+
+            navLinks.forEach(link => {
+                // remove any previous state
+                link.classList.remove('active');
+                link.removeAttribute('aria-current');
+
+                const href = link.getAttribute('href');
+                if (!href) return;
+
+                // If href is an anchor (eg. '#home') consider it pointing to index
+                if (href.startsWith('#')) {
+                    if (current === 'index.html') {
+                        link.classList.add('active');
+                        link.setAttribute('aria-current','page');
+                    }
+                    return;
+                }
+
+                // Normalize filenames
+                const targetFile = href.split('/').pop();
+                if (targetFile === current) {
+                    link.classList.add('active');
+                    link.setAttribute('aria-current','page');
+                }
+            });
+        } catch (e) {
+            // fail silently
+            console.warn('setActiveNavLink error', e);
+        }
+    })();
 });
 
 // Performance optimization: Debounce scroll events
@@ -232,6 +350,46 @@ const safeQuerySelector = (selector) => {
 };
 
 // Export functions for potential use in other scripts
+// Dropdown menu toggle
+const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+dropdownToggles.forEach(toggle => {
+    toggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const wrapper = toggle.closest('.dropdown-wrapper');
+        const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+        
+        // Close all other dropdowns
+        document.querySelectorAll('.dropdown-wrapper.active').forEach(el => {
+            if (el !== wrapper) {
+                el.classList.remove('active');
+                el.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');
+            }
+        });
+        
+        // Toggle current dropdown
+        wrapper.classList.toggle('active');
+        toggle.setAttribute('aria-expanded', !isExpanded);
+    });
+});
+
+// Close dropdown when clicking outside
+document.addEventListener('click', () => {
+    document.querySelectorAll('.dropdown-wrapper.active').forEach(wrapper => {
+        wrapper.classList.remove('active');
+        wrapper.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');
+    });
+});
+
+// Close dropdown on Escape key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        document.querySelectorAll('.dropdown-wrapper.active').forEach(wrapper => {
+            wrapper.classList.remove('active');
+            wrapper.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');
+        });
+    }
+});
+
 window.Heal360Utils = {
     toggleMobileMenu: () => {
         navLinks.classList.toggle('active');
@@ -244,3 +402,4 @@ window.Heal360Utils = {
         }
     }
 };
+
