@@ -22,9 +22,11 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
+            const yOffset = -80; // Header height offset
+            const y = target.getBoundingClientRect().top + window.pageYOffset + yOffset;
+            window.scrollTo({
+                top: y,
+                behavior: 'smooth'
             });
         }
     });
@@ -163,30 +165,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// Blog post detail view
-const blogReadMoreLinks = document.querySelectorAll('.read-more');
-const blogContent = document.getElementById('blog-content');
-const blogDetailSections = document.querySelectorAll('.blog-detail');
-
-blogReadMoreLinks.forEach(link => {
-    link.addEventListener('click', (e) => {
-        e.preventDefault();
-        const postId = link.closest('.blog-post').dataset.post;
-        const targetSection = document.getElementById(postId);
-
-        // Hide all blog details
-        blogDetailSections.forEach(section => {
-            section.style.display = 'none';
-        });
-
-        // Show the clicked blog detail
-        if (targetSection) {
-            targetSection.style.display = 'block';
-            blogContent.style.display = 'block';
-            targetSection.scrollIntoView({ behavior: 'smooth' });
-        }
-    });
-});
+// Blog post detail view (Legacy logic removed - now using blog-details.html)
+// const blogReadMoreLinks = document.querySelectorAll('.read-more');
+// ... logic removed ...
 
 // Form validation
 const forms = document.querySelectorAll('form');
@@ -282,7 +263,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize any sliders or carousels here if added later
 
-    // Check for URL hash and scroll to element
+    // Check for URL hash and scroll to element (Legacy / other pages)
     if (window.location.hash) {
         const target = document.querySelector(window.location.hash);
         if (target) {
@@ -292,8 +273,43 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // New Blog Details Page Logic (Parameters)
+    const urlParams = new URLSearchParams(window.location.search);
+    const blogId = urlParams.get('id');
+
+    if (blogId) {
+        const targetSection = document.getElementById(blogId);
+        if (targetSection) {
+            // Ensure container is visible
+            const container = document.getElementById('blog-content');
+            if (container) container.style.display = 'block';
+
+            // Show specific section
+            targetSection.style.display = 'block';
+
+            // Calculate reading time
+            const text = targetSection.innerText;
+            const wpm = 200;
+            const words = text.trim().split(/\s+/).length;
+            const time = Math.ceil(words / wpm);
+
+            const meta = targetSection.querySelector('.blog-meta');
+            if (meta && !meta.querySelector('.read-time')) {
+                const span = document.createElement('span');
+                span.classList.add('read-time');
+                span.innerHTML = `<i class="far fa-clock"></i> ${time} min read`;
+                meta.appendChild(span);
+            }
+
+            // Scroll to top
+            setTimeout(() => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }, 100);
+        }
+    }
+
     // Highlight active nav link across pages
-    (function setActiveNavLink(){
+    (function setActiveNavLink() {
         try {
             const navLinks = document.querySelectorAll('.nav-links a');
             let current = window.location.pathname.split('/').pop();
@@ -311,7 +327,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (href.startsWith('#')) {
                     if (current === 'index.html') {
                         link.classList.add('active');
-                        link.setAttribute('aria-current','page');
+                        link.setAttribute('aria-current', 'page');
                     }
                     return;
                 }
@@ -320,7 +336,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const targetFile = href.split('/').pop();
                 if (targetFile === current) {
                     link.classList.add('active');
-                    link.setAttribute('aria-current','page');
+                    link.setAttribute('aria-current', 'page');
                 }
             });
         } catch (e) {
@@ -330,7 +346,7 @@ document.addEventListener('DOMContentLoaded', () => {
     })();
 
     // Header logo loader: preload and fallback if it fails to load
-    (function ensureHeaderLogo(){
+    (function ensureHeaderLogo() {
         const logoImg = document.querySelector('.logo img');
         if (!logoImg) return console.warn('Header logo img not found');
 
@@ -344,13 +360,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const fallback = 'images/hero_fertility.png';
 
         const probe = new Image();
-        probe.onload = function() {
+        probe.onload = function () {
             // image exists and loaded
             console.info('Probed header logo loaded:', src);
             // ensure the DOM image uses the same src (in case browser chose source earlier)
             logoImg.src = src;
         };
-        probe.onerror = function() {
+        probe.onerror = function () {
             console.warn('Header logo failed to load, applying fallback:', src);
             logoImg.src = fallback;
             logoImg.removeAttribute('srcset');
@@ -409,7 +425,7 @@ dropdownToggles.forEach(toggle => {
         e.stopPropagation();
         const wrapper = toggle.closest('.dropdown-wrapper');
         const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
-        
+
         // Close all other dropdowns
         document.querySelectorAll('.dropdown-wrapper.active').forEach(el => {
             if (el !== wrapper) {
@@ -417,7 +433,7 @@ dropdownToggles.forEach(toggle => {
                 el.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');
             }
         });
-        
+
         // Toggle current dropdown
         wrapper.classList.toggle('active');
         toggle.setAttribute('aria-expanded', !isExpanded);
@@ -455,3 +471,27 @@ window.Heal360Utils = {
     }
 };
 
+
+// Back to blog functionality
+document.addEventListener('click', (e) => {
+    const btn = e.target.closest('.back-to-blog');
+    if (btn) {
+        e.preventDefault();
+        const blogContent = document.getElementById('blog-content');
+        const blogDetailSections = document.querySelectorAll('.blog-detail');
+
+        if (blogContent) blogContent.style.display = 'none';
+        blogDetailSections.forEach(section => {
+            section.style.display = 'none';
+        });
+
+        // Scroll back to the blog grid or categories
+        const grid = document.getElementById('blog-grid');
+        const categories = document.querySelector('.blog-categories');
+        const target = categories || grid;
+
+        if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+});
