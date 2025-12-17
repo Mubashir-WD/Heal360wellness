@@ -58,21 +58,50 @@ const tabList = document.querySelector('.tabs');
 
 function activateTab(btn) {
     if (!btn) return;
-    // update visual active state
-    tabBtns.forEach(b => {
-        b.classList.toggle('active', b === btn);
-        b.setAttribute('aria-selected', b === btn ? 'true' : 'false');
-        b.tabIndex = b === btn ? 0 : -1;
-    });
 
+    // Scoped active state toggle: find the button group container
+    const container = btn.closest('.tabs, .tab-buttons, .conditions-tabs');
+    if (container) {
+        const siblings = container.querySelectorAll('.tab-btn');
+        siblings.forEach(b => {
+            b.classList.toggle('active', b === btn);
+            b.setAttribute('aria-selected', b === btn ? 'true' : 'false');
+            b.tabIndex = b === btn ? 0 : -1;
+        });
+    } else {
+        // Fallback if no container found (e.g. standalone button), just activate it
+        btn.classList.add('active');
+    }
+
+    // 1. Blog Category Filtering
     const category = btn.dataset.category;
-    blogPosts.forEach(post => {
-        if (category === 'all' || post.classList.contains(category)) {
-            post.style.display = 'block';
-        } else {
-            post.style.display = 'none';
+    if (category) {
+        blogPosts.forEach(post => {
+            if (category === 'all' || post.classList.contains(category)) {
+                post.style.display = 'block';
+            } else {
+                post.style.display = 'none';
+            }
+        });
+    }
+
+    // 2. Content Tab Switching (for Conditions, etc.)
+    const tabId = btn.dataset.tab;
+    if (tabId) {
+        // Find all tab-content elements in the same section or container
+        // This prevents hiding content in other sections if multiple tab groups exist
+        const section = btn.closest('section') || document;
+        const contents = section.querySelectorAll('.tab-content');
+
+        contents.forEach(c => {
+            c.classList.remove('active');
+        });
+
+        const target = document.getElementById(tabId);
+        if (target) {
+            target.classList.add('active');
         }
-    });
+    }
 }
 
 // Click handlers
