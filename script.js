@@ -348,57 +348,8 @@ document.addEventListener('DOMContentLoaded', () => {
     })();
     */
 
-    // Header logo loader: preload and fallback if it fails to load
-    (function ensureHeaderLogo() {
-        const logoImg = document.querySelector('.logo img');
-        if (!logoImg) return console.warn('Header logo img not found');
+    // Header logo loader: Standard browser loading relied upon.
 
-        // If already loaded successfully, nothing to do
-        if (logoImg.complete && logoImg.naturalWidth > 0) {
-            console.info('Header logo loaded successfully');
-            return;
-        }
-
-        const src = logoImg.getAttribute('src');
-        const fallback = 'images/hero_fertility.png';
-
-        const probe = new Image();
-        probe.onload = function () {
-            // image exists and loaded
-            console.info('Probed header logo loaded:', src);
-            // ensure the DOM image uses the same src (in case browser chose source earlier)
-            logoImg.src = src;
-        };
-        probe.onerror = function () {
-            console.warn('Header logo failed to load, applying fallback:', src);
-            logoImg.src = fallback;
-            logoImg.removeAttribute('srcset');
-            // If fallback doesn't load, replace with inline SVG text logo
-            setTimeout(() => {
-                if (logoImg.naturalWidth === 0) {
-                    const link = logoImg.closest('a.logo');
-                    if (link) {
-                        link.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="160" height="52" viewBox="0 0 160 52" aria-label="Heal360 logo"><text x="0" y="36" font-family="Poppins, sans-serif" font-weight="700" font-size="20" fill="#4a5d4a">Heal360</text></svg>';
-                        console.warn('Replaced header logo with inline SVG fallback');
-                    }
-                }
-            }, 120);
-        };
-        probe.src = src;
-        // also attach an error handler in case the DOM image fails later
-        logoImg.addEventListener('error', () => {
-            console.warn('Header logo DOM image error event fired, switching to fallback');
-            logoImg.src = fallback;
-            logoImg.removeAttribute('srcset');
-            const link = logoImg.closest('a.logo');
-            setTimeout(() => {
-                if (logoImg.naturalWidth === 0 && link) {
-                    link.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="160" height="52" viewBox="0 0 160 52" aria-label="Heal360 logo"><text x="0" y="36" font-family="Poppins, sans-serif" font-weight="700" font-size="20" fill="#4a5d4a">Heal360</text></svg>';
-                    console.warn('Replaced header logo with inline SVG fallback (DOM error)');
-                }
-            }, 120);
-        }, { once: true });
-    })();
 });
 
 // Performance optimization: Debounce scroll events
