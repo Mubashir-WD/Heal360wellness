@@ -474,5 +474,154 @@ window.Heal360Utils = {
     }
 };
 
+// Services Slider Logic
+document.addEventListener('DOMContentLoaded', () => {
+    const sliderContainer = document.getElementById('servicesSlider');
+    if (!sliderContainer) return;
 
+    const slides = Array.from(sliderContainer.children);
+    const prevBtn = document.getElementById('sliderPrev');
+    const nextBtn = document.getElementById('sliderNext');
+    const dotsContainer = document.getElementById('sliderDots');
 
+    let currentIndex = 0;
+    let startX, startY;
+    let isDragging = false;
+    let currentTranslate = 0;
+    let prevTranslate = 0;
+    let animationID;
+
+    // Config
+    const autoPlayInterval = 5000;
+    let autoPlayTimer;
+
+    // Responsive items per view
+    function getItemsPerView() {
+        if (window.innerWidth > 1024) return 3;
+        if (window.innerWidth > 650) return 2;
+        return 1;
+    }
+
+    function updateSlider() {
+        const itemsPerView = getItemsPerView();
+        // Calculate offset percentage based on current index and items per view
+        const offset = -(currentIndex * (100 / itemsPerView));
+        sliderContainer.style.transform = `translateX(${offset}%)`;
+
+        // Update dots
+        updateDots();
+    }
+
+    function initDots() {
+        const itemsPerView = getItemsPerView();
+        const maxIndex = Math.max(0, slides.length - itemsPerView);
+
+        dotsContainer.innerHTML = '';
+
+        // One dot for each possible starting position
+        for (let i = 0; i <= maxIndex; i++) {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            if (i === currentIndex) dot.classList.add('active');
+            dot.addEventListener('click', () => {
+                currentIndex = i;
+                updateSlider();
+                resetTimer();
+            });
+            dotsContainer.appendChild(dot);
+        }
+    }
+
+    function updateDots() {
+        const dots = dotsContainer.querySelectorAll('.dot');
+        dots.forEach((dot, index) => {
+            if (index === currentIndex) dot.classList.add('active');
+            else dot.classList.remove('active');
+        });
+    }
+
+    function moveNext() {
+        const itemsPerView = getItemsPerView();
+        const maxIndex = Math.max(0, slides.length - itemsPerView);
+
+        if (currentIndex < maxIndex) {
+            currentIndex++;
+        } else {
+            currentIndex = 0; // Loop back
+        }
+        updateSlider();
+    }
+
+    function movePrev() {
+        const itemsPerView = getItemsPerView();
+        const maxIndex = Math.max(0, slides.length - itemsPerView);
+
+        if (currentIndex > 0) {
+            currentIndex--;
+        } else {
+            currentIndex = maxIndex; // Loop to end
+        }
+        updateSlider();
+    }
+
+    function startTimer() {
+        autoPlayTimer = setInterval(moveNext, autoPlayInterval);
+    }
+
+    function resetTimer() {
+        clearInterval(autoPlayTimer);
+        startTimer();
+    }
+
+    // Initialize
+    initDots();
+    startTimer();
+    window.addEventListener('resize', () => {
+        // Reset index if out of bounds after resize
+        const itemsPerView = getItemsPerView();
+        const maxIndex = Math.max(0, slides.length - itemsPerView);
+        if (currentIndex > maxIndex) currentIndex = maxIndex;
+
+        initDots();
+        updateSlider();
+    });
+
+    nextBtn.addEventListener('click', () => {
+        moveNext();
+        resetTimer();
+    });
+
+    prevBtn.addEventListener('click', () => {
+        movePrev();
+        resetTimer();
+    });
+
+    // Touch events for swipe
+    sliderContainer.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+        isDragging = true;
+        clearInterval(autoPlayTimer);
+    }, { passive: true });
+
+    sliderContainer.addEventListener('touchmove', (e) => {
+        if (!isDragging) return;
+    }, { passive: true });
+
+    sliderContainer.addEventListener('touchend', (e) => {
+        if (!isDragging) return;
+        const endX = e.changedTouches[0].clientX;
+        const diff = startX - endX;
+
+        if (Math.abs(diff) > 50) { // threshold
+            if (diff > 0) moveNext();
+            else movePrev();
+        }
+
+        isDragging = false;
+        startTimer();
+    });
+
+    // Pause on hover
+    sliderContainer.parentElement.addEventListener('mouseenter', () => clearInterval(autoPlayTimer));
+    sliderContainer.parentElement.addEventListener('mouseleave', startTimer);
+});

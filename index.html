@@ -19,6 +19,7 @@
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="services-slider.css">
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 
@@ -79,22 +80,126 @@
         </div>
     </section>
 
-    <section class="experts">
-        <h2>Meet Our Experts</h2>
-        <div class="expert-cards">
-            <div class="expert-card">
-                <img src="images/dr_tahera.JPG" alt="Dr. Tahera Khaledi" loading="lazy">
-                <h3>Dr. Tahera Khaledi</h3>
-                <p>Functional Medicine & Women's Hormone Expert</p>
-                <p>Specializes in PCOS, Endometriosis, PMS, Adenomyosis, unexplained infertility.</p>
+    <!-- New Attractive Services Slider -->
+    <section class="services-section">
+        <div class="slider-wrapper">
+            <h2>Our Specialized Services</h2>
+            <div class="slider-container">
+                <div class="services-slider" id="servicesSlider">
+                    <!-- Service 1 -->
+                    <div class="service-slide">
+                        <div class="service-icon-wrapper">
+                            <div class="service-icon">
+                                <img src="images/PCOS.png" alt="PCOS Reversal" loading="lazy">
+                            </div>
+                        </div>
+                        <h3>PCOS Reversal</h3>
+                        <p>Address the root causes of Polycystic Ovary Syndrome to regulate cycles and restore fertility
+                            naturally without synthetic hormones.</p>
+                        <a href="program/" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+
+                    <!-- Service 2 -->
+                    <div class="service-slide">
+                        <div class="service-icon-wrapper">
+                            <div class="service-icon">
+                                <img src="images/Male_Fertility.png" alt="Male Fertility" loading="lazy">
+                            </div>
+                        </div>
+                        <h3>Male Fertility</h3>
+                        <p>Boost sperm count, motility, and quality through targeted nutritional protocols and lifestyle
+                            adjustments.</p>
+                        <a href="program/" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+
+                    <!-- Service 3 -->
+                    <div class="service-slide">
+                        <div class="service-icon-wrapper">
+                            <div class="service-icon">
+                                <img src="images/Endo.png" alt="Endometriosis" loading="lazy">
+                            </div>
+                        </div>
+                        <h3>Endometriosis</h3>
+                        <p>Manage pain and inflammation while improving egg quality and uterine health for better
+                            conception chances.</p>
+                        <a href="program/" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+
+                    <!-- Service 4 -->
+                    <div class="service-slide">
+                        <div class="service-icon-wrapper">
+                            <div class="service-icon">
+                                <img src="images/Testosterone.png" alt="Hormonal Balance" loading="lazy">
+                            </div>
+                        </div>
+                        <h3>Hormonal Balance</h3>
+                        <p>Correct thyroid, cortisol, and reproductive hormone imbalances that may be preventing
+                            pregnancy.</p>
+                        <a href="program/" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+
+                    <!-- Service 5 -->
+                    <div class="service-slide">
+                        <div class="service-icon-wrapper">
+                            <div class="service-icon">
+                                <img src="images/DNA.png" alt="Unexplained Infertility" loading="lazy">
+                            </div>
+                        </div>
+                        <h3>Unexplained Infertility</h3>
+                        <p>Deep-dive investigative approach to uncover hidden metabolic or environmental factors
+                            affecting fertility.</p>
+                        <a href="program/" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+
+                    <!-- Service 6 -->
+                    <div class="service-slide">
+                        <div class="service-icon-wrapper">
+                            <div class="service-icon">
+                                <img src="images/Egg_Quality.png" alt="Egg Quality & Postpartum" loading="lazy">
+                            </div>
+                        </div>
+                        <h3>Egg Quality & Care</h3>
+                        <p>Improve oocyte quality for conception and receive supportive care for recovery and health.
+                        </p>
+                        <a href="program/" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
             </div>
-            <div class="expert-card">
-                <img src="images/sajjad.png" alt="Syed Sajjad" loading="lazy">
-                <h3>Syed Sajjad</h3>
-                <p>Naturopath & Male Reproductive Health Expert</p>
-                <p>Expert in male hormonal balance, sperm health, lifestyle reversal.</p>
+
+            <div class="slider-controls">
+                <button class="slider-btn prev" id="sliderPrev" aria-label="Previous Service">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15 19L8 12L15 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </button>
+                <div class="slider-dots" id="sliderDots">
+                    <!-- Dots generated by JS -->
+                </div>
+                <button class="slider-btn next" id="sliderNext" aria-label="Next Service">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9 5L16 12L9 19" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </button>
             </div>
         </div>
+    </section>
+    <h2>Meet Our Experts</h2>
+    <div class="expert-cards">
+        <div class="expert-card">
+            <img src="images/dr_tahera.JPG" alt="Dr. Tahera Khaledi" loading="lazy">
+            <h3>Dr. Tahera Khaledi</h3>
+            <p>Functional Medicine & Women's Hormone Expert</p>
+            <p>Specializes in PCOS, Endometriosis, PMS, Adenomyosis, unexplained infertility.</p>
+        </div>
+        <div class="expert-card">
+            <img src="images/sajjad.png" alt="Syed Sajjad" loading="lazy">
+            <h3>Syed Sajjad</h3>
+            <p>Naturopath & Male Reproductive Health Expert</p>
+            <p>Expert in male hormonal balance, sperm health, lifestyle reversal.</p>
+        </div>
+    </div>
     </section>
 
     <section class="outcomes">
