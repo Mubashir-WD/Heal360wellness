@@ -313,6 +313,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const container = document.getElementById('blog-content');
             if (container) container.style.display = 'block';
 
+            // Hide all other sections first
+            document.querySelectorAll('.blog-detail').forEach(el => el.style.display = 'none');
+
             // Show specific section
             targetSection.style.display = 'block';
 
@@ -338,41 +341,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Highlight active nav link across pages
+    // Auto-active link logic removed in favor of server-side/static generation
+    /*
     (function setActiveNavLink() {
-        try {
-            const navLinks = document.querySelectorAll('.nav-links a');
-            let current = window.location.pathname.split('/').pop();
-            if (!current) current = 'index.html';
-
-            navLinks.forEach(link => {
-                // remove any previous state
-                link.classList.remove('active');
-                link.removeAttribute('aria-current');
-
-                const href = link.getAttribute('href');
-                if (!href) return;
-
-                // If href is an anchor (eg. '#home') consider it pointing to index
-                if (href.startsWith('#')) {
-                    if (current === 'index.html') {
-                        link.classList.add('active');
-                        link.setAttribute('aria-current', 'page');
-                    }
-                    return;
-                }
-
-                // Normalize filenames
-                const targetFile = href.split('/').pop();
-                if (targetFile === current) {
-                    link.classList.add('active');
-                    link.setAttribute('aria-current', 'page');
-                }
-            });
-        } catch (e) {
-            // fail silently
-            console.warn('setActiveNavLink error', e);
-        }
+       ...
     })();
+    */
 
     // Header logo loader: preload and fallback if it fails to load
     (function ensureHeaderLogo() {
@@ -501,26 +475,4 @@ window.Heal360Utils = {
 };
 
 
-// Back to blog functionality
-document.addEventListener('click', (e) => {
-    const btn = e.target.closest('.back-to-blog');
-    if (btn) {
-        e.preventDefault();
-        const blogContent = document.getElementById('blog-content');
-        const blogDetailSections = document.querySelectorAll('.blog-detail');
 
-        if (blogContent) blogContent.style.display = 'none';
-        blogDetailSections.forEach(section => {
-            section.style.display = 'none';
-        });
-
-        // Scroll back to the blog grid or categories
-        const grid = document.getElementById('blog-grid');
-        const categories = document.querySelector('.blog-categories');
-        const target = categories || grid;
-
-        if (target) {
-            target.scrollIntoView({ behavior: 'smooth' });
-        }
-    }
-});

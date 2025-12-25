@@ -15,26 +15,25 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="blog-dynamic.css">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../blog-dynamic.css">
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
     <header>
         <nav>
-            <a href="index.html" class="logo">
-                <img src="images/og_image.jpg" srcset="images/og_image@2x.jpg 2x" alt="Heal360 Wellness logo"
+            <a href="../" class="logo">
+                <img src="../images/og_image.jpg" srcset="../images/og_image@2x.jpg 2x" alt="Heal360 Wellness logo"
                     width="160" height="52" loading="eager">
             </a>
             <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About Us</a></li>
-                <li><a href="program.html">Heal360 Program</a></li>
-                <li><a href="team.html">Directors</a></li>
-                <li><a href="blog.html">Blog</a></li>
-                <li><a href="contact.html">Contact</a></li>
-                <!-- <li><a href="login.html">Login</a></li> -->
+                <li><a href="../">Home</a></li>
+                <li><a href="../about/">About Us</a></li>
+                <li><a href="../program/">Heal360 Program</a></li>
+                <li><a href="../team/">Directors</a></li>
+                <li><a href="../blog/" class="active">Blog</a></li>
+                <li><a href="../contact/">Contact</a></li>
             </ul>
             <div class="hamburger">
                 <span></span>
@@ -51,172 +50,20 @@
         </div>
     </section>
 
-    <section class="blog-categories">
+    <!-- Hidden dummy section for category logic safely (just in case script expects it) -->
+    <section class="blog-categories" style="display: none;">
         <div class="container">
-            <div class="category-tabs">
-                <div class="tabs" role="tablist" aria-label="Blog categories">
-                    <button class="tab-btn active" data-category="all" role="tab" aria-selected="true">
-                        <i class="fas fa-th-large" aria-hidden="true"></i>
-                        <span>All Posts</span>
-                    </button>
-                    <button class="tab-btn" data-category="women" role="tab" aria-selected="false">
-                        <i class="fas fa-venus" aria-hidden="true"></i>
-                        <span>Women's Fertility</span>
-                    </button>
-                    <button class="tab-btn" data-category="men" role="tab" aria-selected="false">
-                        <i class="fas fa-mars" aria-hidden="true"></i>
-                        <span>Men's Fertility</span>
-                    </button>
-                </div>
-            </div>
+            <!-- No buttons needed, just structure to prevent JS error if querySelector fails without checking? 
+                Script checks 'if (tabList)'. So we are safe. -->
         </div>
     </section>
 
-    <section class="blog-posts">
-        <div class="container">
-            <div class="blog-grid" id="blog-grid">
-                <!-- Blog Post 1 -->
-                <article class="blog-post women" data-post="pcos-fertility">
-                    <div class="post-image">
-                        <img src="images/PCOS.png" alt="PCOS and Fertility - Functional Medicine Approach"
-                            loading="lazy">
-                    </div>
-                    <div class="post-content">
-                        <h2>PCOS & Fertility: Functional Medicine Approach</h2>
-                        <p class="post-meta">By Dr. Tahera Khaledi | March 15, 2023 | Women's Fertility</p>
-                        <p>Polycystic Ovary Syndrome (PCOS) affects millions of women worldwide and is one of the
-                            leading causes of infertility. Through functional medicine, we can address the root causes
-                            and restore natural fertility.</p>
-                        <a href="blog-details.html?id=pcos-fertility" class="read-more">Read More</a>
-                    </div>
-                </article>
-
-                <!-- Blog Post 2 -->
-                <article class="blog-post women" data-post="endometriosis-conception">
-                    <div class="post-image">
-                        <img src="images/Endo.png" alt="How Endometriosis Affects Conception" loading="lazy">
-                    </div>
-                    <div class="post-content">
-                        <h2>How Endometriosis Affects Conception</h2>
-                        <p class="post-meta">By Dr. Tahera Khaledi | March 10, 2023 | Women's Fertility</p>
-                        <p>Endometriosis can significantly impact fertility by causing inflammation, scar tissue, and
-                            hormonal imbalances. Learn how natural approaches can improve your chances of conception.
-                        </p>
-                        <a href="blog-details.html?id=endometriosis-conception" class="read-more">Read More</a>
-                    </div>
-                </article>
-
-                <!-- Blog Post 3 -->
-                <article class="blog-post women" data-post="low-amh-natural">
-                    <div class="post-image">
-                        <img src="images/Low_AMH.png" alt="Low AMH - What You Can Do Naturally" loading="lazy">
-                    </div>
-                    <div class="post-content">
-                        <h2>Low AMH – What You Can Do Naturally</h2>
-                        <p class="post-meta">By Dr. Tahera Khaledi | March 5, 2023 | Women's Fertility</p>
-                        <p>Low Anti-Müllerian Hormone (AMH) levels can be concerning, but there are natural ways to
-                            support ovarian reserve and improve egg quality. Discover evidence-based strategies.</p>
-                        <a href="blog-details.html?id=low-amh-natural" class="read-more">Read More</a>
-                    </div>
-                </article>
-
-
-                <!-- Blog Post 5 -->
-                <article class="blog-post women" data-post="period-pain-normal">
-                    <div class="post-image">
-                        <img src="images/Period_Pain.png" alt="Why Period Pain Is Not Normal" loading="lazy">
-                    </div>
-                    <div class="post-content">
-                        <h2>Why Period Pain Is Not Normal</h2>
-                        <p class="post-meta">By Dr. Tahera Khaledi | February 20, 2023 | Women's Fertility</p>
-                        <p>Severe period pain is often a sign of underlying hormonal imbalances or inflammatory
-                            conditions. Discover why addressing period pain is key to fertility health.</p>
-                        <a href="blog-details.html?id=period-pain-normal" class="read-more">Read More</a>
-                    </div>
-                </article>
-
-                <!-- Blog Post 6 -->
-                <article class="blog-post men" data-post="improve-sperm-count">
-                    <div class="post-image">
-                        <img src="images/Sperm_Count.png" alt="How to Improve Sperm Count Naturally" loading="lazy">
-                    </div>
-                    <div class="post-content">
-                        <h2>How to Improve Sperm Count Naturally</h2>
-                        <p class="post-meta">By Syed Sajjad | February 15, 2023 | Men's Fertility</p>
-                        <p>Low sperm count affects many men, but lifestyle and dietary changes can significantly improve
-                            sperm production. Learn natural strategies backed by science.</p>
-                        <a href="blog-details.html?id=improve-sperm-count" class="read-more">Read More</a>
-                    </div>
-                </article>
-
-                <!-- Blog Post 7 -->
-                <article class="blog-post men" data-post="male-hormones-fertility">
-                    <div class="post-image">
-                        <img src="images/Male_Fertility.png" alt="Male Hormones & Fertility: Complete Guide"
-                            loading="lazy">
-                    </div>
-                    <div class="post-content">
-                        <h2>Male Hormones & Fertility: Complete Guide</h2>
-                        <p class="post-meta">By Syed Sajjad | February 10, 2023 | Men's Fertility</p>
-                        <p>Testosterone, cortisol, and other hormones play crucial roles in male fertility. Understand
-                            how hormonal balance affects sperm production and quality.</p>
-                        <a href="blog-details.html?id=male-hormones-fertility" class="read-more">Read More</a>
-                    </div>
-                </article>
-
-                <!-- Blog Post 8 -->
-                <article class="blog-post men" data-post="stress-testosterone-sperm">
-                    <div class="post-image">
-                        <img src="images/Testosterone.png" alt="Effect of Stress on Testosterone & Sperm Quality"
-                            loading="lazy">
-                    </div>
-                    <div class="post-content">
-                        <h2>Effect of Stress on Testosterone & Sperm Quality</h2>
-                        <p class="post-meta">By Syed Sajjad | February 5, 2023 | Men's Fertility</p>
-                        <p>Chronic stress can severely impact male fertility by disrupting hormones and sperm
-                            production. Learn how to manage stress for better reproductive health.</p>
-                        <a href="blog-details.html?id=stress-testosterone-sperm" class="read-more">Read More</a>
-                    </div>
-                </article>
-
-                <!-- Blog Post 9 -->
-                <article class="blog-post men" data-post="dna-fragmentation-reverse">
-                    <div class="post-image">
-                        <img src="images/DNA.png" alt="DNA Fragmentation: Natural Ways to Reverse" loading="lazy">
-                    </div>
-                    <div class="post-content">
-                        <h2>DNA Fragmentation: Natural Ways to Reverse</h2>
-                        <p class="post-meta">By Syed Sajjad | January 30, 2023 | Men's Fertility</p>
-                        <p>Sperm DNA fragmentation can affect fertility and pregnancy outcomes. Discover natural
-                            approaches to repair and protect sperm DNA integrity.</p>
-                        <a href="blog-details.html?id=dna-fragmentation-reverse" class="read-more">Read More</a>
-                    </div>
-                </article>
-
-                <!-- Blog Post 10 -->
-                <article class="blog-post men" data-post="male-fertility-diet">
-                    <div class="post-image">
-                        <img src="images/Male_Fer.png" alt="Male Fertility Diet: What Every Man Should Eat"
-                            loading="lazy">
-                    </div>
-                    <div class="post-content">
-                        <h2>Male Fertility Diet: What Every Man Should Eat</h2>
-                        <p class="post-meta">By Syed Sajjad | January 25, 2023 | Men's Fertility</p>
-                        <p>Diet plays a crucial role in male fertility. Learn about the essential nutrients and foods
-                            that support optimal sperm production and quality.</p>
-                        <a href="blog-details.html?id=male-fertility-diet" class="read-more">Read More</a>
-                    </div>
-                </article>
-            </div>
-        </div>
-    </section>
-
-    <!-- Blog Post Content Sections (Hidden by default, shown when clicked) -->
-    <div id="blog-content" class="blog-content" style="display: none;">
+    <!-- Blog Post Content Sections (Hidden by default, shown based on URL param) -->
+    <div id="blog-content" class="blog-content">
         <!-- PCOS & Fertility Blog -->
         <section id="pcos-fertility" class="blog-detail">
             <div class="container">
-                <a href="#" class="back-to-blog"
+                <a href="../blog/" class="back-to-blog"
                     style="display: inline-flex; align-items: center; gap: 8px; margin-bottom: 20px; color: var(--dark-green); text-decoration: none; font-weight: 500;"><i
                         class="fas fa-arrow-left"></i> Back to Blogs</a>
                 <article class="blog-article">
@@ -230,7 +77,7 @@
                     </header>
 
                     <div class="blog-image">
-                        <img src="images/pcos-blog-large.jpg" alt="PCOS and Fertility - Functional Medicine Approach"
+                        <img src="../images/pcos-blog-large.jpg" alt="PCOS and Fertility - Functional Medicine Approach"
                             loading="lazy">
                     </div>
 
@@ -296,17 +143,19 @@
                     <div class="blog-cta">
                         <h3>Ready to Address Your PCOS Naturally?</h3>
                         <p>Join Heal360's personalized program designed for women with PCOS.</p>
-                        <a href="contact.html" class="btn primary">Book Consultation</a>
+                        <a href="../contact/" class="btn primary">Book Consultation</a>
                     </div>
                 </article>
             </div>
         </section>
 
-        <!-- Add similar detailed content for other 9 blogs -->
-        <!-- For brevity, I'll include placeholders for the other blogs -->
+        <!-- Other Blogs -->
 
         <section id="endometriosis-conception" class="blog-detail" style="display: none;">
             <div class="container">
+                <a href="../blog/" class="back-to-blog"
+                    style="display: inline-flex; align-items: center; gap: 8px; margin-bottom: 20px; color: var(--dark-green); text-decoration: none; font-weight: 500;"><i
+                        class="fas fa-arrow-left"></i> Back to Blogs</a>
                 <article class="blog-article">
                     <header class="blog-header">
                         <h1>How Endometriosis Affects Conception</h1>
@@ -316,53 +165,77 @@
                             <span>Women's Fertility</span>
                         </div>
                     </header>
-                    <!-- Full content for endometriosis blog -->
+                    <div class="blog-image">
+                        <img src="../images/Endo.png" alt="How Endometriosis Affects Conception" loading="lazy">
+                    </div>
+                    <div class="blog-body">
+                        <p>Endometriosis can significantly impact fertility by causing inflammation, scar tissue, and
+                            hormonal imbalances. Learn how natural approaches can improve your chances of conception.
+                        </p>
+                        <!-- Note: Placeholder content was in original file. Kept structural integrity. -->
+                    </div>
                     <div class="blog-cta">
                         <h3>Struggling with Endometriosis?</h3>
                         <p>Learn how our natural approach can help manage symptoms and improve fertility.</p>
-                        <a href="contact.html" class="btn primary">Get Help</a>
+                        <a href="../contact/" class="btn primary">Get Help</a>
                     </div>
                 </article>
             </div>
         </section>
 
-        <!-- Continue with placeholders for remaining blogs -->
         <section id="low-amh-natural" class="blog-detail" style="display: none;">
             <div class="container">
+                <a href="../blog/" class="back-to-blog"
+                    style="display: inline-flex; align-items: center; gap: 8px; margin-bottom: 20px; color: var(--dark-green); text-decoration: none; font-weight: 500;"><i
+                        class="fas fa-arrow-left"></i> Back to Blogs</a>
                 <article class="blog-article">
                     <header class="blog-header">
                         <h1>Low AMH – What You Can Do Naturally</h1>
-                        <!-- Content -->
+                        <div class="blog-meta">
+                            <span>By Dr. Tahera Khaledi</span>
+                            <span>March 5, 2023</span>
+                            <span>Women's Fertility</span>
+                        </div>
                     </header>
-                </article>
-            </div>
-        </section>
-
-        <section id="egg-quality-foods" class="blog-detail" style="display: none;">
-            <div class="container">
-                <article class="blog-article">
-                    <header class="blog-header">
-                        <h1>Egg Quality Boosting Foods</h1>
-                        <!-- Content -->
-                    </header>
+                    <div class="blog-image">
+                        <img src="../images/Low_AMH.png" alt="Low AMH" loading="lazy">
+                    </div>
+                    <div class="blog-body">
+                        <p>Low Anti-Müllerian Hormone (AMH) levels can be concerning, but there are natural ways to
+                            support ovarian reserve and improve egg quality. Discover evidence-based strategies.</p>
+                    </div>
                 </article>
             </div>
         </section>
 
         <section id="period-pain-normal" class="blog-detail" style="display: none;">
             <div class="container">
+                <a href="../blog/" class="back-to-blog"
+                    style="display: inline-flex; align-items: center; gap: 8px; margin-bottom: 20px; color: var(--dark-green); text-decoration: none; font-weight: 500;"><i
+                        class="fas fa-arrow-left"></i> Back to Blogs</a>
                 <article class="blog-article">
                     <header class="blog-header">
                         <h1>Why Period Pain Is Not Normal</h1>
-                        <!-- Content -->
+                        <div class="blog-meta">
+                            <span>By Dr. Tahera Khaledi</span>
+                            <span>February 20, 2023</span>
+                            <span>Women's Fertility</span>
+                        </div>
                     </header>
+                    <div class="blog-image">
+                        <img src="../images/Period_Pain.png" alt="Period Pain" loading="lazy">
+                    </div>
+                    <div class="blog-body">
+                        <p>Severe period pain is often a sign of underlying hormonal imbalances or inflammatory
+                            conditions. Discover why addressing period pain is key to fertility health.</p>
+                    </div>
                 </article>
             </div>
         </section>
 
         <section id="improve-sperm-count" class="blog-detail" style="display: none;">
             <div class="container">
-                <a href="#" class="back-to-blog"
+                <a href="../blog/" class="back-to-blog"
                     style="display: inline-flex; align-items: center; gap: 8px; margin-bottom: 20px; color: var(--dark-green); text-decoration: none; font-weight: 500;"><i
                         class="fas fa-arrow-left"></i> Back to Blogs</a>
                 <article class="blog-article">
@@ -376,7 +249,7 @@
                     </header>
 
                     <div class="blog-image">
-                        <img src="images/Sperm_Count.png" alt="How to Improve Sperm Count Naturally" loading="lazy">
+                        <img src="../images/Sperm_Count.png" alt="How to Improve Sperm Count Naturally" loading="lazy">
                     </div>
 
                     <div class="table-of-contents">
@@ -450,7 +323,7 @@
                         <h3>Concerned About Sperm Health?</h3>
                         <p>Our Male Fertility Reversal Program is designed to naturally boost sperm count and quality.
                         </p>
-                        <a href="contact.html" class="btn primary">Book a Discovery Call</a>
+                        <a href="../contact/" class="btn primary">Book a Discovery Call</a>
                     </div>
                 </article>
             </div>
@@ -458,44 +331,100 @@
 
         <section id="male-hormones-fertility" class="blog-detail" style="display: none;">
             <div class="container">
+                <a href="../blog/" class="back-to-blog"
+                    style="display: inline-flex; align-items: center; gap: 8px; margin-bottom: 20px; color: var(--dark-green); text-decoration: none; font-weight: 500;"><i
+                        class="fas fa-arrow-left"></i> Back to Blogs</a>
                 <article class="blog-article">
                     <header class="blog-header">
                         <h1>Male Hormones & Fertility: Complete Guide</h1>
-                        <!-- Content -->
+                        <div class="blog-meta">
+                            <span>By Syed Sajjad</span>
+                            <span>February 10, 2023</span>
+                            <span>Men's Fertility</span>
+                        </div>
                     </header>
+                    <div class="blog-image">
+                        <img src="../images/Male_Fertility.png" alt="Male Hormones" loading="lazy">
+                    </div>
+                    <div class="blog-body">
+                        <p>Testosterone, cortisol, and other hormones play crucial roles in male fertility. Understand
+                            how hormonal balance affects sperm production and quality.</p>
+                    </div>
                 </article>
             </div>
         </section>
 
         <section id="stress-testosterone-sperm" class="blog-detail" style="display: none;">
             <div class="container">
+                <a href="../blog/" class="back-to-blog"
+                    style="display: inline-flex; align-items: center; gap: 8px; margin-bottom: 20px; color: var(--dark-green); text-decoration: none; font-weight: 500;"><i
+                        class="fas fa-arrow-left"></i> Back to Blogs</a>
                 <article class="blog-article">
                     <header class="blog-header">
                         <h1>Effect of Stress on Testosterone & Sperm Quality</h1>
-                        <!-- Content -->
+                        <div class="blog-meta">
+                            <span>By Syed Sajjad</span>
+                            <span>February 5, 2023</span>
+                            <span>Men's Fertility</span>
+                        </div>
                     </header>
+                    <div class="blog-image">
+                        <img src="../images/Testosterone.png" alt="Stress" loading="lazy">
+                    </div>
+                    <div class="blog-body">
+                        <p>Chronic stress can severely impact male fertility by disrupting hormones and sperm
+                            production. Learn how to manage stress for better reproductive health.</p>
+                    </div>
                 </article>
             </div>
         </section>
 
         <section id="dna-fragmentation-reverse" class="blog-detail" style="display: none;">
             <div class="container">
+                <a href="../blog/" class="back-to-blog"
+                    style="display: inline-flex; align-items: center; gap: 8px; margin-bottom: 20px; color: var(--dark-green); text-decoration: none; font-weight: 500;"><i
+                        class="fas fa-arrow-left"></i> Back to Blogs</a>
                 <article class="blog-article">
                     <header class="blog-header">
                         <h1>DNA Fragmentation: Natural Ways to Reverse</h1>
-                        <!-- Content -->
+                        <div class="blog-meta">
+                            <span>By Syed Sajjad</span>
+                            <span>January 30, 2023</span>
+                            <span>Men's Fertility</span>
+                        </div>
                     </header>
+                    <div class="blog-image">
+                        <img src="../images/DNA.png" alt="DNA" loading="lazy">
+                    </div>
+                    <div class="blog-body">
+                        <p>Sperm DNA fragmentation can affect fertility and pregnancy outcomes. Discover natural
+                            approaches to repair and protect sperm DNA integrity.</p>
+                    </div>
                 </article>
             </div>
         </section>
 
         <section id="male-fertility-diet" class="blog-detail" style="display: none;">
             <div class="container">
+                <a href="../blog/" class="back-to-blog"
+                    style="display: inline-flex; align-items: center; gap: 8px; margin-bottom: 20px; color: var(--dark-green); text-decoration: none; font-weight: 500;"><i
+                        class="fas fa-arrow-left"></i> Back to Blogs</a>
                 <article class="blog-article">
                     <header class="blog-header">
                         <h1>Male Fertility Diet: What Every Man Should Eat</h1>
-                        <!-- Content -->
+                        <div class="blog-meta">
+                            <span>By Syed Sajjad</span>
+                            <span>January 25, 2023</span>
+                            <span>Men's Fertility</span>
+                        </div>
                     </header>
+                    <div class="blog-image">
+                        <img src="../images/Male_Fer.png" alt="Diet" loading="lazy">
+                    </div>
+                    <div class="blog-body">
+                        <p>Diet plays a crucial role in male fertility. Learn about the essential nutrients and foods
+                            that support optimal sperm production and quality.</p>
+                    </div>
                 </article>
             </div>
         </section>
@@ -515,19 +444,20 @@
     <footer>
         <div class="footer-content">
             <div class="footer-section footer-brand">
-                <img src="images/og_image.jpg" alt="Heal360 Wellness logo" class="footer-logo" loading="lazy">
+                <img src="../images/og_image.jpg" alt="Heal360 Wellness logo" class="footer-logo" loading="lazy">
                 <h3>Heal360</h3>
                 <p>Natural Fertility Reversal Program</p>
             </div>
             <div class="footer-section">
                 <h3>Quick Links</h3>
                 <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="program.html">Program</a></li>
-                    <li><a href="team.html">Directors</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="../">Home</a></li>
+                    <li><a href="../about/">About Us</a></li>
+                    <li><a href="../program/">Program</a></li>
+                    <li><a href="../team/">Directors</a></li>
+                    <li><a href="../blog/">Blog</a></li>
+                    <li><a href="../contact/">Contact</a></li>
+                    <li><a href="../privacy/">Privacy Policy</a></li>
                 </ul>
             </div>
             <div class="footer-section">
@@ -537,13 +467,12 @@
                 <p><i class="fab fa-whatsapp"></i> WhatsApp: +91-8919242355</p>
             </div>
         </div>
-        </div>
         <div class="footer-bottom">
             <p>&copy; 2025 Heal360. All rights reserved.</p>
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="../script.js"></script>
 </body>
 
 </html>
